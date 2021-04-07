@@ -1,31 +1,47 @@
-import React, { useState } from 'react';
-import SearchBar from './components/SearchBar';
-import ImageList from './components/ImageList';
-import axios from 'axios';
+import React from 'react';
+import Button from './components/Button';
+import Result from './components/Result';
+import './App.scss';
+
 
 const App = () => {
-  const [images, setImages] = useState([]);
-  const ApiKey = process.env.REACT_APP_PIXABAY_APIKEY;
-  const onSearchSubmit = async(term) => {
-    try{
-      const params={
-        key: ApiKey,
-        q: term,
-      };
-      const response = await axios.get("https://pixabay.com/api/",{params});
-      setImages(response.data.hits);
-      if (response === 0){
-        window.alert('お探しの画像はありません')
-      }
-    }catch{
-      window.alert('写真の取得に失敗しました')
-    }
-  };
+
   return (
-    <div className='ui container' style={{ marginTop: '20px' }}>
-      <SearchBar onSubmit={onSearchSubmit}/>
-      <ImageList  images={images}/>
-    </div>
+    <>
+      <div className='result'>
+        <Result result={'計算結果'} />
+      </div>
+      <div className='button-wrapper'>
+        <div className='number'>
+          <div className='upper'>
+            <Button text={'7'} />
+            <Button text={'8'} />
+            <Button text={'9'} />
+          </div>
+          <div className='middle'>
+            <Button text={'4'} />
+            <Button text={'5'} />
+            <Button text={'6'} />
+          </div>
+          <div className='lower'>
+            <Button text={'1'} />
+            <Button text={'2'} />
+            <Button text={'3'} />
+          </div>
+          <div className='bottom'>
+            <Button text={'0'} />
+            <Button text={'AC'} />
+            <Button text={'='} />
+          </div>
+        </div>
+        <div className='operator'>
+          <Button text={'÷'} />
+          <Button text={'x'} />
+          <Button text={'-'} />
+          <Button text={'+'} />
+        </div>
+      </div>
+    </>
   )
 }
 
