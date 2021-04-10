@@ -1,4 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {
+  onNumberClick,
+  onPlusClick,
+  onMinusClick,
+  onMultiplyClick,
+  onDivideClick,
+  onEqualClick,
+  onClearClick,
+} from './redux/actions';
 import Button from './components/Button';
 import Result from './components/Result';
 import './App.scss';
@@ -45,4 +55,18 @@ const App = () => {
   )
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    calculator: state.calculator,
+  };
+};
+
+export default connect(mapStateToProps, {
+  onNumberClick,
+  onPlusClick,
+  onMinusClick,
+  onMultiplyClick,
+  onDivideClick,
+  onEqualClick,
+  onClearClick,
+})(App);
